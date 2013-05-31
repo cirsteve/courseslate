@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+
+ <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/css/bootstrap.css">
+ <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css">
+ <link href='http://fonts.googleapis.com/css?family=Overlock+SC' rel='stylesheet' type='text/css'>
+        
+  
+ <title>{% block title-tag %}CourseSlate{% endblock %}</title>
+
+
+</head>
+
+<body>
+    <div id="header" class="container-fluid">
+        <div class="row-fluid">
+            <div class="header-nav span4">
+                <a id="course" href="/topics/">Courses</a>
+                <a id="resource" href="/resources/">Resources</a>
+                <a id="people" href="/people/">People</a>
+            </div>
+            <div class="span4 calign">
+                <a id="header-title" href='/'>Course<span class="slate">Slate</span></a>
+            </div>
+            <div class="header-nav span4 ralign">
+                {% if request.user.is_authenticated %}
+
+
+                <a href={% with url_name="topic_create" %}
+                        {% url url_name %}
+                        {% endwith %}
+                        >Add Topic</a> 
+
+                <a href={% with url_name="personalresource_create" %}
+                        {% url url_name %}
+                        {% endwith %}
+                        >Add Resource</a>
+                <a id="current-user" >{{ request.user }} <i class="icon-white"></i></a>
+
+
+                {% else %}
+
+                <a href="/accounts/signup/"class="signup">Sign Up</a>      
+                <a href="/accounts/login/" class="login">Login</a>      
+
+                {% endif %}
+            </div>
+        </div>
+
+        <div id="sub-header" class="row-fluid">
+            <div id="profile-box" class="offset8 span4 sub-box">
+                <a id="current-user" href="/people/{{ request.user }}/">{{ request.user }}</a>
+                <a href="/people/edit-profile/">Edit Your Profile</a>, <a href="/accounts/logout/">Logout</a>
+            </div>
+        </div>
+    </div>
+   
+
+    <div id="main-body" class="container-fluid">
+        <div id="main-body-row" class="container-fluid">
+        </div>
+    </div>
+
+  <div class="content">
+    {% block content %}{% endblock %}
+  </div>
+    
+  <div class="footer span16">
+    {% block footer %}
+    <hr>
+    {% endblock %}
+  </div>
+
+  <script type="text/javascript" src="{{ STATIC_URL }}libs/js/jquery-2.0.0.min.js"></script>  
+  <script type="text/javascript" src="{{ STATIC_URL }}libs/js/underscore-min.js"></script>  
+  <script type="text/javascript" src="{{ STATIC_URL }}libs/js/backbone-min.js"></script>  
+  <script type="text/javascript" src="{{ STATIC_URL }}libs/js/handlebarsrc3.js"></script>  
+  <script type="text/javascript" src="{{ STATIC_URL }}libs/js/html2canvas.js"></script>  
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>  
+  <script type="text/javascript" src="{{ STATIC_URL }}js/templates.js"></script>  
+  <script type="text/javascript" src="{{ STATIC_URL }}js/compiled.js"></script>  
+    {% block footer-scripts %} {% endblock %}
+
+  </div>
+
+</body>
+</html>

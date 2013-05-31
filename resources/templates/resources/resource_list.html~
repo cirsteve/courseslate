@@ -1,0 +1,19 @@
+{% extends "aresource_base.html" %}
+
+{% block content %}
+<h3>List of Resources</h3>
+
+    <div class="content-list">
+    
+        {% include "includes/resources_list_inc.html" %}
+
+    </div>
+
+{% endblock %}
+
+{% endblock %}
+
+{% block footer-scripts %}
+{{ block.super }}
+
+{% endblock %}

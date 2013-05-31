@@ -1,0 +1,19 @@
+{% extends "courses_base.html" %}
+{% load taggit_extras %}
+
+{% block content %}
+
+
+<h2>{{ category.name }}</h2>
+
+
+    {% include "includes/topic_list_inc.html" %}
+
+
+{% endblock %}
+
+
+{% block footer-scripts %}
+{{ block.super }}
+
+{% endblock %}

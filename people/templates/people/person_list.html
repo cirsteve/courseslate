@@ -1,0 +1,28 @@
+{% extends "people_base.html" %}
+
+{% block content %}
+    <h1>Browse Through Members</h1>
+
+    <div class="content-list">
+        
+    {% include "includes/people_list_inc.html" %}
+
+    </div>
+{% endblock %}
+
+
+{% block footer-scripts %}
+{{ block.super }}
+<script type="text/javascript">
+
+$('.content-list a[id]').bind('click', function(e){
+    e.preventDefault();
+    var user = $(this).parent('li').find('p').find('a').text();
+    var view = '/?view=' + $(this).attr('id');
+    window.location = site_url + 'people/' + user + view;
+});
+
+</script>
+
+
+{% endblock %}

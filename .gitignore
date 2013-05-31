@@ -1,0 +1,7 @@
+*.pyc
+*.py~
+config.py
+db.db
+node_modules/
+static/
+static_files/

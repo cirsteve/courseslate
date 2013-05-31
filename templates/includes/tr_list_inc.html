@@ -1,0 +1,48 @@
+{% load markup %}
+{% load people_tags %}
+
+
+<ul class="ocl tr-list">
+    {% for r in tr_list %}
+    
+        <li>
+            <div class="course_id"><a href= {{ r.topic.get_absolute_url }}>Course: {{ r.topic }}</a></div>
+            <h5>{{ r.title }}</h5>
+
+            {% if r.eureka %}
+                
+            <b>!!!<span>Eureka! It's all coming together</span></b>
+
+            {% endif %}
+
+            <p>
+                <a class="tru" href={{ r.resource.url }}>{{ r.resource.url|sliceit:65 }}</a>
+            </p>
+            <div class="oc">
+            
+                {{ r.note|markdown }}
+
+                <p>Added <span class="created">{{ r.added|date:"d/m/y" }}</span>{% if r.rtype %} |<a href={% url resource_type_detail r.rtype.slug %}>{{ r.rtype }}</a>{% endif %}
+                    | Video: {{ resource.video|yesno:"Y,N" }}
+
+                {% if request.user == topic.person.user %}
+
+                | <a href="{% url topic_resource_delete r.topic.person.user r.topic.slug r.id %}">Delete</a>
+                <a class="ajax-edit" href="{% url topic_resource_edit r.topic.person.user r.topic.slug r.id %}">Edit</a>
+
+                {% endif %}</p>
+
+            </div>
+
+        </li>
+
+    {% empty %}
+
+        <p>No topics yet</p>
+
+    {% endfor %}
+</ul>
+
+
+
+

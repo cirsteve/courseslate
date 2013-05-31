@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load taggit_extras %}
+{% block sectionhead %}
+
+	<h2>Resources</h2>
+
+
+
+	<ul>
+        <li><a href="
+                    {% with url_name="resource_list" %}
+                    {% url url_name %}
+                    {% endwith %}
+                    ">Resources</a></li>
+        <li><a href="
+                    {% with url_name="resource_type_list" %}
+                    {% url url_name %}
+                    {% endwith %}
+                    ">Resource Types</a></li>
+        <li><a href="">Tags</a></li>
+	</ul>
+
+{% endblock %}
+
+{% block sidebar %}
+<div class="side-head">
+    <a href=""><h3>Resource Tags</h3></a>
+
+</div>
+    {% get_taglist as tagc for 'resources.PersonalResource' %}
+    <ul class="tags tag-list">
+    {% for tag in tagc %}
+        <li><a href="
+                {% with url_name="resource_tags_detail" %}
+                {% url url_name tag.name %}
+                {% endwith %}
+                ">{{ tag.name }}</a></li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}
+
+{% block footer-scripts %}
+<script type="text/javascript">
+$('a#resourcelink').addClass('current_nav');
+</script>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "mystudy_base.html" %}
+
+{% block content %}
+<div class="span14">
+	<h2>Course Tags</h2>
+
+		<ul class="tag-list">
+			{% for t in tag_list %}
+				<span class="half-col"><li><a href='{% url topic_tags_detail t.name %}'>{{ t.name }} </a></li> X {{ t.count }}</span>
+			{% endfor %}
+		</ul>
+</div>
+
+{% endblock %}

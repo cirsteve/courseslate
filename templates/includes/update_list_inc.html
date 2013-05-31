@@ -1,0 +1,42 @@
+{% load markup %}
+
+
+
+<ul class="ocl update-list">
+    {% for u in update_list %}
+    
+        <li>
+             <h5>{{ u.title }}</h5>
+
+            {% if u.eureka %}
+                <b>!!!<span> Eureka! Now you are getting it!</span></b>
+            {% endif %}
+
+             <div class="oc">
+
+             {{ u.comment|textile }}
+                
+                <p>Added <span class="created">{{ u.added|date:"d/m/y f a" }}</span>
+             
+                    {% if request.user == topic.person.user %}
+                    | <a href="{% with url_name="topic_update_delete" %}
+                        {% url url_name  topic.person.user topic.slug u.id %}
+                        {% endwith %}%}">Delete</a>
+                    <a class="ajax-edit" href="{% with url_name="topic_update_edit" %}
+                        {% url url_name topic.person.user topic.slug u.id %}
+                        {% endwith %}">Edit</a>
+             {% endif %}</p>
+
+             
+             </div>
+        </li>
+
+
+    {% empty %}
+
+        <p>No updates yet.</p>
+    
+    {% endfor %}
+</ul>
+
+

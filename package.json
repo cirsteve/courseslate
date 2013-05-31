@@ -1,0 +1,13 @@
+{
+  "name": "courseslate",
+  "version": "0.1.0",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.4.3",
+    "grunt-contrib-watch": "~0.4.2",
+    "grunt-contrib-less": "~0.5.1",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-handlebars": "~0.5.8",
+    "grunt-shell": "~0.2.2"
+  }
+}

@@ -1,0 +1,10 @@
+{% extends "base_site.html" %}
+
+{% block content %}
+<div id="content">
+
+<p>You have successfully logged out. Log back in below.</p>
+{% include "registration/login_form.html" %}
+
+</div>
+{% endblock %}

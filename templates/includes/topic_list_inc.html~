@@ -1,0 +1,25 @@
+{% load markup %}
+
+
+
+<ul class="ocl topic-list">
+            {% for t in topic_list %}
+                
+                <li>
+
+                    <h5><a href={{ t.get_absolute_url }}>{{ t.title }}</a></h5>
+
+                    <div class="oc">
+                        {{ t.description|markdown }}
+<p>Added <span class="created">{{ t.created|date:"d/m/y-f a" }}</span> in <a href={{ t.category.get_absolute_url }}>{{ t.category }}</a>
+<span class="pinfo"> by <a href="{{ t.person.get_absolute_url }}">{{ t.person }}</a></span></p>
+                </div>
+                </li>
+            
+            {% empty %}
+
+                <p>No topics</p>
+
+            {% endfor %}
+</ul>
+

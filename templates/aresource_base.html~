@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load tagging_tags %}
+
+{% block sectionhead %}
+
+	<h2>Resources</h2>
+
+
+
+	<ul>
+		<li><a href="{% url resource_list %}">Resources</a></li>
+        <li><a href="{% url resource_type_list %}">Resource Types</a></li>
+        <li><a href="{% url resource_tags_list %}">Tags</a></li>
+	</ul>
+
+{% endblock %}
+
+{% block sidebar %}
+<div class="side-head">
+    <a href={% url resource_tags_list %}><h3>Resource Tags</h3></a>
+
+</div>
+    {% tag_cloud_for_model aresource.PersonalResource as tagc %}
+    <ul class="tags tag-list">
+    {% for tag in tagc %}
+        <li><a href="{% url resource_tags_detail tag.name %}">{{ tag.name }}</a></li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}
+
+
+<script type="text/javascript">
+$('a#resourcelink').addClass('current_nav');
+</script>
+{% endblock %}

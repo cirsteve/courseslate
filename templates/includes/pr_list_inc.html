@@ -1,0 +1,38 @@
+{% load markup %}
+{% load people_tags %}
+
+
+<ul class="ocl pr-list">
+
+    {% for u in pr_list %}
+  
+        <li>
+        
+        <h5><a href="{% url personalresource_detail u.person u.id %}">
+{% if 0 == u.title|length %}
+{{ u.person }} Resource</a></h5>
+{% else %}
+{{ u.title }}</a></h5> <br />
+{% endif %}
+        <a class="tru" href='{{ u.resource.url }}'>{{ u.resource.url|sliceit:65 }}</a>
+        <div class="oc">
+
+            {{ u.note|markdown }}
+
+            <p>Added <span class="created">{{ u.added|date:"d/m/y" }}</span>| Video: {{ resource.video|yesno:"Y,N" }}<span class="pinfo"> by {{ u.person }}</span></p>
+
+        
+
+        </div>
+        </li>
+
+    {% empty %}
+
+        <p>No resources at this time.</p>
+    
+    {% endfor %}
+
+
+
+</ul>
+

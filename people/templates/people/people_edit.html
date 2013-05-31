@@ -1,0 +1,16 @@
+{% extends "people_base.html" %}
+{% load taggit_extras %}
+
+{% block content %}
+    <h2>Edit Your Profile Info</h2>
+    <a href="{% url account_edit %}">Edit Your Account Info</a>
+    <form action="" method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit" />
+    </form>
+{% endblock %}
+
+{% block footer-scripts %}
+{{ block.super }}
+
+{% endblock %}

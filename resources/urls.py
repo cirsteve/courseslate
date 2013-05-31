@@ -1,0 +1,23 @@
+from django.conf.urls.defaults import *
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+
+from resources.views import ResourceListView, ResourceDetailView, ResourceCreateView
+from resources.views import ResourceTypeDetailView, ResourceTypeListView, ResourceTypeCreateView
+#from resources.views import ResourceTagListView, ResourceTagDetailView
+from resources.views import PersonalResourceCreateView, PersonalResourceDetailView, PersonalResourceListView
+from resources.views import resource_set_json, post_personal_resource
+from django.views.generic import TemplateView
+
+urlpatterns = patterns('',
+    url(r'get-json/post-personal-resource/$', csrf_exempt(post_personal_resource), name='post_personal_resource'),
+    url(r'get-json/resource-set/(?P<restype>[-\w]+)/(?P<resset>[-\w]+)/$', resource_set_json, name='resource_set_json'),
+#    url(r'get-json/tag-set/for-user/', login_required(get_tags_json), name='get_tags_json'),
+    url(r'type/$', ResourceTypeListView.as_view(), name='resource_type_list'),
+    url(r'type/(?P<slug>[-\w]+)/$', ResourceTypeDetailView.as_view(), name='resource_type_detail'),
+#    url(r'tags/$', ResourceTagListView.as_view(), name='resource_tags_list'),
+#    url(r'tags/(?P<name>[-\w]+)/$', ResourceTagDetailView.as_view(), name='resource_tags_detail'),
+#    url(r'create/$', login_required(ResourceCreateView.as_view())),
+    url(r'(?P<pk>\d+)/$', ResourceDetailView.as_view(), name='resource_detail'),
+    url(r'^$', ResourceListView.as_view(), name='resource_list'),
+)

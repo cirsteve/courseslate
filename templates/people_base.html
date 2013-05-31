@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load taggit_extras %}
+
+
+{% block sectionhead %}
+
+    <h2>People</h2>
+
+    <ul>
+        <li><a href="/people/">All People</a></li>
+    </ul>
+
+
+{% endblock %}
+
+{% block footer-scripts %}
+<script type="text/javascript">
+$('a#peoplelink').addClass('current_nav');
+</script>
+{% endblock %}

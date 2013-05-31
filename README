@@ -1,0 +1,5 @@
+Bookmarking/learning management platform built with Django and the following third party apps:
+    'registration',
+    'taggit',
+    'taggit_templatetags',
+    'south',

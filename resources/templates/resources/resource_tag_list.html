@@ -1,0 +1,30 @@
+{% extends "resources_base.html" %}
+
+{% block content %}
+
+<div class="span14">
+    <h2>Browse Resource by Tag</h2>
+
+    <ul class="tag-list">
+{% for r in tag_list %}
+
+
+            <span class="half-col"><li><a href="{% url resource_tags_detail name=r.name %}">{{ r.name }}</a></li> X {{ r.count }}</span>
+
+
+
+{% endfor %}
+    </ul>
+    
+ 
+
+{% endblock %}
+
+
+{% block footer-scripts %}
+{{ block.super }}
+
+{% endblock %}
+
+
+    

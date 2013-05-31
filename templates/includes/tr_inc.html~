@@ -1,0 +1,27 @@
+{% load markup %}
+{% load people_tags %}
+
+
+
+       <li>
+        
+            <h5>{{ r.title }}</h5>
+
+            {% if r.eureka %}
+                <b>!!!<span>Eureka! It's all coming together</span></b>
+            {% endif %}
+
+            <p><a class="tru" href={{ r.resource.url }}>{{ r.resource.url|sliceit:70 }}</a></p>
+            <div class="oc">
+            {{ r.note|markdown }}
+            <p>Added {{ r.added|date:"d/m/y" }}{% if r.rtype %} |<a href={% url resource_type_detail r.rtype.slug %}>{{ r.rtype }}</a>{% endif %}
+             {% if request.user == topic.person.user %}
+| <a href="{% url topic_resource_delete r.topic.person.user r.topic.slug r.id %}">Delete</a>
+ <a href="{% url topic_resource_edit r.topic.person.user r.topic.slug r.id %}">Edit</a>
+             {% endif %}</p>
+</div>
+        </li>
+
+
+
+

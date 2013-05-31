@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load taggit_extras %}
+
+
+
+{% block sidebar %}
+
+<div class="wrap">
+    <div class="side-head">
+	
+        <a href="
+            "><h3>Course Tags</h3></a>
+
+    </div>
+</div>
+
+	{% get_taglist as tagc for "courses" %}
+    <ul class="tag-list">
+	{% for tag in tagc %}
+		<li><a href="{% url topic_tags_detail tag.name %}">{{ tag.name }}</a></li>
+	{% endfor %}
+    </ul>
+
+{% endblock %}
+
+{% block sectionhead %}
+
+	<h2>Courses</h2>
+
+	<ul>
+		<li><a href="/topics/">Courses</a></li>
+		<li><a href="/topics/category/">Categories</a></li>
+        <li><a href="/topics/tags-cs/">Tags</a></li>
+	</ul>
+
+{% endblock %}
+
+{% block footer-scripts %}
+<script type="text/javascript">
+$('a#courselink').addClass('current_nav');
+</script>
+{% endblock %}

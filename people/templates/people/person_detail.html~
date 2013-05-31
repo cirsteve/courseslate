@@ -1,0 +1,92 @@
+{% extends "people_base.html" %}
+{% load tagging_tags %}
+
+{% block content %}
+    <h2>{{ person.user }}</h2>
+    <p>Name: {{ person.user.get_full_name }}</p>
+    <p>Email: {{ person.user.email }}</p>
+    <p>Member Since: {{ person.user.date_joined }}</p>
+    <p>Location: {{ person.location }}</p>
+    <p>About {{ person.user }}: {{ person.bio }}</p>
+    <p>Website: <a href="{{ person.website }}">{{ person.website }}</a></p>
+
+    {% if request.user == person.user %}
+
+    <div class="bookmarklet">
+        <h4>CourseSlate Bookmarklet:</h4>
+        <p>(Drag the button below onto your browser's toolbar)</p>
+
+    <a id="csbookmarklet"
+           href="javascript:(function(){window.open('http://localhost:8000/people/user-resources/add?url='+encodeURI(window.location.href),'height=200,width=150')}())">
+           CS+url</a>
+
+<a id="csbookmarklet"
+           href="javascript:(function(){"use strict"; var request = new XMLHttpRequest(); request.open('GET', 'http://localhost:8000/resources/get-json/tag-set/for-user/', true); request.onreadystatexchange = function () {var done = 4, ok = 200; if (request.readyState === done && request.status === ok) {if (request.responseText) { alert(request.responseText) } } }; request.send(null); })">
+           CS+tag</a>
+
+    </div>
+
+    {% endif %}
+
+
+    <div class="content-list user-page half pull-left ocl">
+
+        <h3>Courses - {{ person.topic_set.count }}</h3><br />
+
+            <span class="view-input">
+                <input type="checkbox" id="courses" class="hide" value="courses" />
+                <a href={% url user_topic_list person.user.username %}>Courses Only</a>
+            </span>
+            <input class="hide expand-trigger" type="button" value="Expand All" />
+            <select class="list-sort">
+                <option value="def" default>Order By...</option>
+                <option value="Newest" >Newest</option>
+                <option value="Oldest">Oldest</option>
+                <option value="AZ">A to Z</option>
+                <option value="ZA">Z to A</option>
+            </select>
+
+        {% include "includes/topic_list_inc.html" %}
+
+    </div>
+
+    <div class="content-list user-page half pull-right">
+    
+        <h3>Resources - {{ person.personalresource_set.count }}</h3><br />
+
+            <span class="view-input">
+                <input type="checkbox" id="resources" class="hide" value="resources" />
+                <a href={% url personalresource_list person.user.username %}>Resources Only</a>
+            </span>
+            <input class="hide expand-trigger" type="button" value="Expand All" />
+            <select class="list-sort">
+                <option value="def" default>Order By...</option>
+                <option value="Newest" >Newest</option>
+                <option value="Oldest">Oldest</option>
+                <option value="AZ">A to Z</option>
+                <option value="ZA">Z to A</option>
+            </select>
+
+         {% include "includes/pr_list_inc.html" %}
+
+    </div>
+   
+{% endblock %}
+
+{% block footer-scripts %}
+{{ block.super }}
+<script type="text/javascript">
+
+$(document).ready(function (){
+    var urlQ = window.location.search;
+    urlQ = urlQ.replace('?', '');
+    var split = urlQ.split('=');
+    if ( urlQ !== '' ) {
+        var view = '"' + split[1] + '"'
+        var b = $('input:checkbox[id=' + view + ']').attr('checked',true);
+        applyFull(b);
+    }
+});
+</script>
+
+{% endblock %}
